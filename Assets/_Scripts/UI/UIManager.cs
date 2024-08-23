@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
         TileMovementController.Instance.OnMoveCountChanged += OnMoveCountChanged;
         TileMovementController.Instance.OnLevelSucceded += OnLevelSucceded;
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
+        ShapeChanger.Instance.OnColorChanged += ChangeColor;
+        ShapeChanger.Instance.OnShapeChanged += ChangeShape;
         colorImange.color = gameSettingsSO.gameSettings.color;
         topMenu.color = gameSettingsSO.gameSettings.color;
         moveCountText.text = gameSettingsSO.gameSettings.moveCount.ToString();
@@ -117,22 +119,22 @@ public class UIManager : MonoBehaviour
     }
     public void ChangeShape()
     {
-        SettingsManager.Instance.ChangeShape();
+     //   ShapeChanger.Instance.ChangeShape();
         tileShape.sprite = gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex];
     }
     [SerializeField] Color[] availableColors;
     int colorIndex;
     public void ChangeColor()
     {
-        colorIndex++;
+       /* colorIndex++;
         if (colorIndex >= availableColors.Length)
         {
             colorIndex = 0;
         }
-        gameSettingsSO.gameSettings.color = availableColors[colorIndex];
+        gameSettingsSO.gameSettings.color = availableColors[colorIndex];*/
         colorImange.color = gameSettingsSO.gameSettings.color;
         topMenu.color = gameSettingsSO.gameSettings.color;
-        SettingsManager.Instance.ChangeColor();
+       // ShapeChanger.Instance.ChangeColor();
     }
     public void OpenPauseScreen()
     {

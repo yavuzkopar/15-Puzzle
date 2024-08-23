@@ -3600,8 +3600,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 644623975}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1502337112}
+        m_TargetAssemblyTypeName: ShapeChanger, Assembly-CSharp
         m_MethodName: ChangeShape
         m_Mode: 1
         m_Arguments:
@@ -5090,6 +5090,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettingsSO: {fileID: 11400000, guid: 341064d85814c4146b9248be266cce97, type: 2}
+  availableColors:
+  - {r: 0, g: 0, b: 0.7, a: 1}
+  - {r: 0.7, g: 0, b: 0.7, a: 1}
+  - {r: 0.7, g: 0.7, b: 0, a: 1}
+  - {r: 0, g: 0.7, b: 0, a: 1}
+  - {r: 0.7, g: 0, b: 0, a: 1}
 --- !u!4 &1502337113
 Transform:
   m_ObjectHideFlags: 0
@@ -6491,8 +6497,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 644623975}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1502337112}
+        m_TargetAssemblyTypeName: ShapeChanger, Assembly-CSharp
         m_MethodName: ChangeColor
         m_Mode: 1
         m_Arguments:

@@ -22,8 +22,8 @@ public class MapGenerator : MonoBehaviour
         }
     }
     private void Start() {
-        SettingsManager.Instance.SetMap(map);
-        SettingsManager.Instance.ChangeColor();
+    //    ShapeChanger.Instance.SetMap(map);
+     //   ShapeChanger.Instance.ChangeColor();
     }
     void CopyMap(TileMap mapTile)
     {
@@ -39,7 +39,7 @@ public class MapGenerator : MonoBehaviour
             GenerateTilePrefabsfromData(item);
         }
         SetCameraAndBackground();
-      //  SettingsManager.Instance.SetMap(map);
+     //   ShapeChanger.Instance.SetMap(map);
     }
 
     private void GenerateTilePrefabsfromData(TilePosition item)
@@ -74,7 +74,7 @@ public class MapGenerator : MonoBehaviour
 
         SetCameraAndBackground();
         ShuffleTiles();
-      //  SettingsManager.Instance.SetMap(map);
+      //  ShapeChanger.Instance.SetMap(map);
 
     }
 
