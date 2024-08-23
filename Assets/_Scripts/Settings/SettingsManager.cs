@@ -10,16 +10,12 @@ public class SettingsManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void Start()
-    {
-      //  map = MapGenerator.Instance.map;
-      //  MapGenerator.Instance.OnMapChanged += () => map = MapGenerator.Instance.map;
-        ChangeColor();
-    }
+    // Setted in Map Gnerator
     public void SetMap(TileMap map)
     {
         this.map = map;
     }
+    
     public void ChangeColor()
     {
         List<TilePosition> listToCheck = map.grid.GetAll();
@@ -27,9 +23,9 @@ public class SettingsManager : MonoBehaviour
         {
             if (item == map.GetEmptyTile())
                 continue;
-            item.tileObject.SetColor(gameSettingsSO.gameSettings.color);
+            item.tileObjectData.SetColor(gameSettingsSO.gameSettings.color);
         }
-    }
+    } 
     public void ChangeShape()
     {
         gameSettingsSO.gameSettings.tileShapeIndex++;
@@ -46,7 +42,7 @@ public class SettingsManager : MonoBehaviour
         {
             if (item == map.GetEmptyTile())
                 continue;
-            item.tileObject.SetTileShape(gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
+            item.tileObjectData.SetTileShape(gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
         }
     }
 }

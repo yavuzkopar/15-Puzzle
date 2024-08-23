@@ -1,8 +1,8 @@
 [System.Serializable]
 public class Record{
-    public int width, height;
-    public int moveCount;
-    public float time;
+    public readonly int width, height;
+    public readonly int moveCount;
+    public readonly float time;
     public Record(int width, int height, int moveCount,float time) {
         this.width = width;
         this.height = height;

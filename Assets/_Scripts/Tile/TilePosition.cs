@@ -5,7 +5,7 @@ public class TilePosition
 {
     public int x;
     public int y;
-    public TileObjectData tileObject;
+    public TileObjectData tileObjectData;
     [SerializeField] int order;
     public TilePosition(int x, int y)
     {

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileMovementController : MonoBehaviour {
-     TileMap map;
+    private TileMap map;
     [SerializeField] GameSettingsSO gameSettingsSO;
     bool paused;
     public Action<bool> OnPaused;
     public Action<int> OnMoveCountChanged;
     public Action OnLevelSucceded;
-    bool canMakeMove;
+    private bool canMakeMove;
     public static TileMovementController Instance{get;private set;}
     private void Awake() {
         Instance = this;
@@ -47,48 +47,48 @@ public class TileMovementController : MonoBehaviour {
     public void MoveTile(TilePosition tilePos)
     {
         if(IsMiss(tilePos)) return;
-        if (tilePos.tileObject.isMoving) return;
+        if (tilePos.tileObjectData.isMoving) return;
         if (paused) return;
-        if (tilePos.x == map.GetEmptyTile().x)
+        if (tilePos.x == map.GetEmptyTile().x)//move up or down
         {
             int amount = map.GetEmptyTile().y - tilePos.y;
-            int carpan = 1;
-            if (amount < 0)
-            { carpan = -1; }
-            amount = Mathf.Abs(amount);
+            int multiplier = 1;
+            if (amount < 0)// move down else move up
+            { multiplier = -1; }
+            amount = Mathf.Abs(amount);//Distance
             List<TilePosition> objectsToMove = new();
             for (int i = 0; i < amount; i++)
             {
-                TilePosition tp = map.grid.GetTilePosition(tilePos.x, tilePos.y + (i * carpan));
+                TilePosition tp = map.grid.GetTilePosition(tilePos.x, tilePos.y + (i * multiplier));
                 objectsToMove.Add(tp);
             }
-            for (int i = objectsToMove.Count - 1; i >= 0; i--)
+            for (int i = objectsToMove.Count - 1; i >= 0; i--)//from the closest to farthest
             {
-                TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x, objectsToMove[i].y + (1 * carpan));
-                tilePosition.tileObject = objectsToMove[i].tileObject;
-                objectsToMove[i].tileObject.Move(tilePosition.Position(),gameSettingsSO.gameSettings.moveType);
+                TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x, objectsToMove[i].y + (1 * multiplier));
+                tilePosition.tileObjectData = objectsToMove[i].tileObjectData;
+                objectsToMove[i].tileObjectData.Move(tilePosition.Position(),gameSettingsSO.gameSettings.moveType);
             }
             gameSettingsSO.gameSettings.moveCount += objectsToMove.Count;
             OnMoveCountChanged?.Invoke(gameSettingsSO.gameSettings.moveCount);
         }
-        else if (tilePos.y == map.GetEmptyTile().y)
+        else if (tilePos.y == map.GetEmptyTile().y)// move right or left
         {
             int amount = map.GetEmptyTile().x - tilePos.x;
-            int carpan = 1;
-            if (amount < 0)
-            { carpan = -1; }
-            amount = Mathf.Abs(amount);
+            int multiplier = 1;
+            if (amount < 0)//move left else move right
+            { multiplier = -1; }
+            amount = Mathf.Abs(amount);//Distance
             List<TilePosition> objectsToMove = new();
             for (int i = 0; i < amount; i++)
             {
-                TilePosition tp = map.grid.GetTilePosition(tilePos.x + (i * carpan), tilePos.y);
+                TilePosition tp = map.grid.GetTilePosition(tilePos.x + (i * multiplier), tilePos.y);
                 objectsToMove.Add(tp);
             }
-            for (int i = objectsToMove.Count - 1; i >= 0; i--)
+            for (int i = objectsToMove.Count - 1; i >= 0; i--)//from the closest to farthest
             {
-                TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x + (1 * carpan), objectsToMove[i].y);
-                tilePosition.tileObject = objectsToMove[i].tileObject;
-                objectsToMove[i].tileObject.Move(tilePosition.Position(),gameSettingsSO.gameSettings.moveType);
+                TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x + (1 * multiplier), objectsToMove[i].y);
+                tilePosition.tileObjectData = objectsToMove[i].tileObjectData;
+                objectsToMove[i].tileObjectData.Move(tilePosition.Position(),gameSettingsSO.gameSettings.moveType);
             }
             gameSettingsSO.gameSettings.moveCount += objectsToMove.Count;
             OnMoveCountChanged?.Invoke(gameSettingsSO.gameSettings.moveCount);
@@ -99,7 +99,7 @@ public class TileMovementController : MonoBehaviour {
             LevelSucceed();
         }
     }
-    bool IsMiss(TilePosition tilePos)
+    bool IsMiss(TilePosition tilePos)// is tile position valid
     {
         bool isMiss = (tilePos.x != map.GetEmptyTile().x && tilePos.y != map.GetEmptyTile().y) || tilePos == map.GetEmptyTile();
         return isMiss;
@@ -112,7 +112,6 @@ public class TileMovementController : MonoBehaviour {
     {
         canMakeMove = false;
         yield return new WaitForSeconds(0.5f);
-        
         OnLevelSucceded?.Invoke();
         Pause(true);
         canMakeMove = true;
@@ -120,11 +119,9 @@ public class TileMovementController : MonoBehaviour {
     public void Pause(bool value)
     {
         StartCoroutine(OneFrameLaterPause(value));
-
     }
     IEnumerator OneFrameLaterPause(bool value)
     {
-
         paused = value;
         if (paused)
         {
@@ -148,11 +145,12 @@ public class TileMovementController : MonoBehaviour {
         }
         return true;
     }
-    bool IsInRightPosition(TilePosition tilePos)
+    //Check if tile is in right position
+    private bool IsInRightPosition(TilePosition tilePos)
     {
         if (tilePos == map.GetEmptyTile()) return true;
 
-        if (tilePos.tileObject.number == tilePos.GetOrder())
+        if (tilePos.tileObjectData.number == tilePos.GetOrder())
         {
             return true;
         }

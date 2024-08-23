@@ -12,7 +12,7 @@ public class TileMap
         this.width = width;
         this.height = height;
         grid = new(width, height);
-        Vector2Int emptySpot = new Vector2Int(width - 1, 0);
+        Vector2Int emptySpot = new Vector2Int(width - 1, 0);//Last one
         int order = 0;
         for (int y = height - 1; y >= 0; y--)
         {
@@ -21,7 +21,7 @@ public class TileMap
                 order++;
                 grid.SetTilePosition(new(x, y));
                 grid.GetTilePosition(x, y).SetOrder(order);
-                if (x == emptySpot.x && y == emptySpot.y)
+                if (x == emptySpot.x && y == emptySpot.y)//last grid position
                 {
                     emptyTile = grid.GetTilePosition(x, y);
                     continue;
@@ -31,15 +31,14 @@ public class TileMap
                 temp.transform.position = new Vector2(x, y);
                 temp.tileObjectData.NumberChanged(order);
                 temp.tileObjectData.SetTileShape(sprite);
-
-                grid.GetTilePosition(x, y).tileObject = temp.tileObjectData;
+                grid.GetTilePosition(x, y).tileObjectData = temp.tileObjectData;
             }
         }
     }
     public TilePosition GetEmptyTile() => emptyTile;
     public void SetEmptyTile(int x, int y)
     {
-        grid.GetTilePosition(x, y).tileObject = null;
+        grid.GetTilePosition(x, y).tileObjectData = null;
         emptyTile = grid.GetTilePosition(x, y);
     }
 }

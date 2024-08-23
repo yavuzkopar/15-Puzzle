@@ -16,8 +16,15 @@ public class TimeManager : MonoBehaviour
         currentTime = gameSettingsSO.gameSettings.currentTime;
         StartCoroutine(UpdateTimer());
         MapGenerator.Instance.OnMapChanged += ResetTimer;
+        GameManager.Instance.OnExit += OnExit;
         OnTimeUpdated?.Invoke(currentTime);
     }
+
+    private void OnExit()
+    {
+        gameSettingsSO.gameSettings.currentTime =currentTime;
+    }
+
     IEnumerator UpdateTimer()
     {
         while (true)
@@ -35,8 +42,4 @@ public class TimeManager : MonoBehaviour
         OnTimeUpdated?.Invoke(currentTime);
     }
     public float GetCurrentTime()=>currentTime;
-    public void SaveCurrentTime()
-    {
-        gameSettingsSO.gameSettings.currentTime = currentTime;
-    }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 [System.Serializable]
-public class TileGrid
+public class TileGrid//I ısed this method instead of TilePosition[,] because I wanted to serialize to json 
 {
     public NestedArray[] grid;
     public int width, height;

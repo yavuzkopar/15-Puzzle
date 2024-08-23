@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
         colorImange.color = gameSettingsSO.gameSettings.color;
         topMenu.color = gameSettingsSO.gameSettings.color;
-        // timeText.text = GetTime(gameSettingsSO.gameSettings.currentTime);
         moveCountText.text = gameSettingsSO.gameSettings.moveCount.ToString();
         OnTimeUpdated(gameSettingsSO.gameSettings.currentTime);
         OnMoveCountChanged(gameSettingsSO.gameSettings.moveCount);

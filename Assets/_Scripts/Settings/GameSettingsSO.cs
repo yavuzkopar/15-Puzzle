@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameSettingsSO : ScriptableObject
 {
     public string playerPrefKey;
-    public AnimationCurve tileMoveCurve;
     public Sprite[] tileshapes;
     public GameSettings gameSettings;
     [SerializeField] string saveText;

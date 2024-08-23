@@ -15,45 +15,49 @@ public class MapGenerator : MonoBehaviour
     {
         Instance = this;
         if (PlayerPrefs.HasKey(gameSettingsSO.playerPrefKey))
-            CopyMap(gameSettingsSO.gameSettings.mapTile);
+            CopyMap(gameSettingsSO.gameSettings.mapTile);//Generate last saved Map
         else
         {
             CreateNewMapTile();
         }
     }
+    private void Start() {
+        SettingsManager.Instance.SetMap(map);
+        SettingsManager.Instance.ChangeColor();
+    }
     void CopyMap(TileMap mapTile)
     {
         map = mapTile;
-        SettingsManager.Instance.SetMap(map);
+        
         foreach (var item in map.grid.GetAll())
         {
-            if (item.tileObject == null || item.tileObject.number == 0)
+            if (item.tileObjectData == null || item.tileObjectData.number == 0)
             {
                 map.SetEmptyTile(item.x, item.y);
                 continue;
             }
-            TileObject temp = GameObject.Instantiate(tilePrefab, transform);
-            temp.SetTileData(item.tileObject);
-            temp.transform.position = item.Position();
-            temp.tileObjectData.NumberChanged(item.tileObject.number);
-            temp.tileObjectData.SetTileShape(gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
+            GenerateTilePrefabsfromData(item);
         }
+        SetCameraAndBackground();
+      //  SettingsManager.Instance.SetMap(map);
+    }
+
+    private void GenerateTilePrefabsfromData(TilePosition item)
+    {
+        TileObject temp = GameObject.Instantiate(tilePrefab, transform);
+        temp.SetTileData(item.tileObjectData);
+        temp.transform.position = item.Position();
+        temp.tileObjectData.NumberChanged(item.tileObjectData.number);
+        temp.tileObjectData.SetTileShape(gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
+    }
+
+    private void SetCameraAndBackground()
+    {
         Camera.main.transform.position = new Vector3(map.width / 2f - .5f, map.height / 2f - 0.5f, -10);
         int bigger = Mathf.Max(map.width, map.height);
         Camera.main.orthographicSize = bigger;
         _backGround.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
         _backGround.localScale = new Vector3(map.width + 0.1f, map.height + 0.1f, 1);
-    }
-  
-    private void Update()
-    {
-     
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-           // TimeManager.Instance.SaveCurrentTime();
-            gameSettingsSO.SaveGameSettings();
-            Application.Quit();
-        }
     }
     public void CreateNewMapTile()
     {
@@ -63,17 +67,19 @@ public class MapGenerator : MonoBehaviour
         }
         int width = gameSettingsSO.gameSettings.wight;
         int height = gameSettingsSO.gameSettings.hight;
-        map = new TileMap(width, height, transform, tilePrefab,gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
-        SettingsManager.Instance.SetMap(map);
+        map = new TileMap(width, height, transform, tilePrefab, gameSettingsSO.tileshapes[gameSettingsSO.gameSettings.tileShapeIndex]);
+        
         OnMapChanged?.Invoke();
         gameSettingsSO.gameSettings.mapTile = map;
-       // gameSettingsSO.gameSettings.moveCount = 0;
-       // gameSettingsSO.gameSettings.currentTime = 0;
-        Camera.main.transform.position = new Vector3(width / 2f - .5f, height / 2f - 0.5f, -10);
-        int bigger = Mathf.Max(width, height);
-        Camera.main.orthographicSize = bigger;
-        _backGround.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
-        _backGround.localScale = new Vector3(width + 0.1f, height + 0.1f, 1);
+
+        SetCameraAndBackground();
+        ShuffleTiles();
+      //  SettingsManager.Instance.SetMap(map);
+
+    }
+
+    private void ShuffleTiles()
+    {
         int repeatTime = map.width * map.height;
         if (gameSettingsSO.gameSettings.difficulty == Difficulty.Hard)
         {
@@ -83,13 +89,14 @@ public class MapGenerator : MonoBehaviour
         {
             RandomMove();
         }
-
     }
+
     bool IsMiss(TilePosition tilePos)
     {
         bool isMiss = (tilePos.x != map.GetEmptyTile().x && tilePos.y != map.GetEmptyTile().y) || tilePos == map.GetEmptyTile();
         return isMiss;
     }
+
     void RandomMove()
     {
         List<TilePosition> listToCheck = new List<TilePosition>(map.grid.GetAll());
@@ -116,8 +123,8 @@ public class MapGenerator : MonoBehaviour
             for (int i = objectsToMove.Count - 1; i >= 0; i--)
             {
                 TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x, objectsToMove[i].y + (1 * carpan));
-                tilePosition.tileObject = objectsToMove[i].tileObject;
-                objectsToMove[i].tileObject.Teleport(tilePosition.Position());
+                tilePosition.tileObjectData = objectsToMove[i].tileObjectData;
+                objectsToMove[i].tileObjectData.Teleport(tilePosition.Position());
             }
         }
         else if (tilePos.y == map.GetEmptyTile().y)
@@ -136,15 +143,11 @@ public class MapGenerator : MonoBehaviour
             for (int i = objectsToMove.Count - 1; i >= 0; i--)
             {
                 TilePosition tilePosition = map.grid.GetTilePosition(objectsToMove[i].x + (1 * carpan), objectsToMove[i].y);
-                tilePosition.tileObject = objectsToMove[i].tileObject;
-                objectsToMove[i].tileObject.Teleport(tilePosition.Position());
+                tilePosition.tileObjectData = objectsToMove[i].tileObjectData;
+                objectsToMove[i].tileObjectData.Teleport(tilePosition.Position());
             }
         }
         map.SetEmptyTile(tilePos.x, tilePos.y);
     }
-    private void OnDestroy()
-    {
-       // TimeManager.Instance.SaveCurrentTime();
-        gameSettingsSO.SaveGameSettings();
-    }
+   
 }

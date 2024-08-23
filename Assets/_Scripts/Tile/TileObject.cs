@@ -16,17 +16,18 @@ public class TileObject : MonoBehaviour
         this.tileObjectData.OnColorChanged += OnColorChanged;
         this.tileObjectData.OnNumberChanged += SetNumber;
         this.tileObjectData.OnShapeChanged += ShapeChanged;
-        this.tileObjectData.OnTelepoerted += Teleportt;
+        this.tileObjectData.OnTelepoerted += Teleport;
     }
-    private void OnDisable() {
-         this.tileObjectData.OnMove -= Move;
+    private void OnDisable()
+    {
+        this.tileObjectData.OnMove -= Move;
         this.tileObjectData.OnColorChanged -= OnColorChanged;
         this.tileObjectData.OnNumberChanged -= SetNumber;
         this.tileObjectData.OnShapeChanged -= ShapeChanged;
-        this.tileObjectData.OnTelepoerted -= Teleportt;
+        this.tileObjectData.OnTelepoerted -= Teleport;
     }
-
-    private void Teleportt(Vector2 vector2)
+    //for the first time called in map generator
+    private void Teleport(Vector2 vector2)
     {
         transform.position = vector2;
     }
@@ -45,11 +46,11 @@ public class TileObject : MonoBehaviour
         text.text = number.ToString();
     }
 
-    private void Move(Vector2 vector2,MoveType moveType)
+    private void Move(Vector2 vector2, MoveType moveType)
     {
-        StartCoroutine(MoveRoutine(vector2,moveType));
+        StartCoroutine(MoveRoutine(vector2, moveType));
     }
-    IEnumerator MoveRoutine(Vector2 vector2,MoveType moveType)
+    IEnumerator MoveRoutine(Vector2 vector2, MoveType moveType)
     {
         tileObjectData.isMoving = true;
         Vector3 endPos = new Vector3(vector2.x, vector2.y, 0);
@@ -57,18 +58,18 @@ public class TileObject : MonoBehaviour
         switch (moveType)
         {
             case MoveType.NoAnim:
-                moveRoutine = Teleport(endPos);
+                moveRoutine = InstantMove(endPos);
                 break;
-                case MoveType.StraightMoveUnclamped:
+            case MoveType.StraightMoveUnclamped:
                 moveRoutine = StraightMoveUnclamped(endPos);
                 break;
-                case MoveType.StraightMoveClamped:
+            case MoveType.StraightMoveClamped:
                 moveRoutine = StraightMoveClamped(endPos);
                 break;
-                case MoveType.JumpMoveUnclamped:
+            case MoveType.JumpMoveUnclamped:
                 moveRoutine = JumpMoveUnclamped(endPos);
                 break;
-                case MoveType.JumpMoveClamped:
+            case MoveType.JumpMoveClamped:
                 moveRoutine = JumpMoveClamped(endPos);
                 break;
         }
@@ -77,7 +78,7 @@ public class TileObject : MonoBehaviour
         transform.position = endPos;
         tileObjectData.isMoving = false;
     }
-    IEnumerator Teleport(Vector3 vector2)
+    IEnumerator InstantMove(Vector3 vector2)
     {
         transform.position = vector2;
         tileObjectData.isMoving = false;
@@ -135,7 +136,7 @@ public class TileObject : MonoBehaviour
             yield return null;
         }
     }
-
+    //Bezier Movement
     Vector3 LerpedMove(Vector3 startpos, Vector3 endpos, float lerpValue, bool unclamped)
     {
         Vector3 dir = (endpos - startpos).normalized;
@@ -144,9 +145,9 @@ public class TileObject : MonoBehaviour
         midPoint += t;
         Vector3 a = Vector3.Lerp(startpos, midPoint, lerpValue);
         Vector3 b = Vector3.Lerp(midPoint, endpos, lerpValue);
-        if (unclamped) return Vector3.LerpUnclamped(a, b, lerpValue);
-        else return Vector3.Lerp(a, b, lerpValue);
-
+        if (unclamped)
+            return Vector3.LerpUnclamped(a, b, lerpValue);
+        else
+            return Vector3.Lerp(a, b, lerpValue);
     }
-
 }
