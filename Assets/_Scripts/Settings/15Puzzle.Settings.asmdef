@@ -1,0 +1,17 @@
+{
+    "name": "15Puzzle.Settings",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5c36dc947fd3cff46b05bee5de72b236",
+        "GUID:564a007c5e98b0046a0db5857ddad9dc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

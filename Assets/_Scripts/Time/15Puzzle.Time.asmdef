@@ -1,0 +1,17 @@
+{
+    "name": "15Puzzle.Time",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0b29910808a41df4a82d01351699e810",
+        "GUID:96862928ca7d0e8439a9384fcc005696"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,17 @@
+{
+    "name": "15Puzzle.Tiles",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5c36dc947fd3cff46b05bee5de72b236",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "15Puzzle.Map",
+    "rootNamespace": "15Puzzle.Map",
+    "references": [
+        "GUID:5c36dc947fd3cff46b05bee5de72b236",
+        "GUID:0b29910808a41df4a82d01351699e810",
+        "GUID:564a007c5e98b0046a0db5857ddad9dc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
