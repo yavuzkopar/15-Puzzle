@@ -13,39 +13,6 @@ MonoBehaviour:
   m_Name: GameSettingsSO
   m_EditorClassIdentifier: 
   playerPrefKey: Settings
-  tileMoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7091745
-      value: 1.0682265
-      inSlope: 1.0460505
-      outSlope: 1.0460505
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   tileshapes:
   - {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   - {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
@@ -53,7 +20,7 @@ MonoBehaviour:
   gameSettings:
     wight: 3
     hight: 3
-    color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+    color: {r: 0.7, g: 0.7, b: 0, a: 1}
     moveType: 4
     mapTile:
       grid:
@@ -61,75 +28,75 @@ MonoBehaviour:
         - testTileX:
           - x: 0
             y: 0
-            tileObject:
+            tileObjectData:
               number: 7
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 7
           - x: 0
             y: 1
-            tileObject:
-              number: 2
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 4
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 4
           - x: 0
             y: 2
-            tileObject:
-              number: 4
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 0
+              color: {r: 0, g: 0, b: 0, a: 0}
               shapeIndex: 0
               isMoving: 0
             order: 1
         - testTileX:
           - x: 1
             y: 0
-            tileObject:
-              number: 5
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 8
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 8
           - x: 1
             y: 1
-            tileObject:
-              number: 0
-              color: {r: 0, g: 0, b: 0, a: 0}
+            tileObjectData:
+              number: 5
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 5
           - x: 1
             y: 2
-            tileObject:
+            tileObjectData:
               number: 1
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 2
         - testTileX:
           - x: 2
             y: 0
-            tileObject:
-              number: 8
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 6
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 9
           - x: 2
             y: 1
-            tileObject:
-              number: 6
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 3
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 6
           - x: 2
             y: 2
-            tileObject:
-              number: 3
-              color: {r: 0.6509804, g: 0.52156866, b: 0.63765424, a: 1}
+            tileObjectData:
+              number: 2
+              color: {r: 0.7, g: 0.7, b: 0, a: 1}
               shapeIndex: 0
               isMoving: 0
             order: 3
@@ -139,31 +106,7 @@ MonoBehaviour:
       height: 3
     currentTime: 0
     moveCount: 0
-    records:
-    - width: 3
-      height: 3
-      moveCount: 3
-      time: 1.7000003
-    - width: 3
-      height: 3
-      moveCount: 7
-      time: 5.499997
-    - width: 3
-      height: 3
-      moveCount: 7
-      time: 3.7999985
-    - width: 3
-      height: 3
-      moveCount: 6
-      time: 4.1999984
-    - width: 3
-      height: 3
-      moveCount: 48
-      time: 54.799736
-    - width: 4
-      height: 4
-      moveCount: 6
-      time: 4.499998
-    tileShapeIndex: 0
+    records: []
+    tileShapeIndex: 2
     difficulty: 0
   saveText: 
